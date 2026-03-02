@@ -1,46 +1,6 @@
 // ─── TIMONIA — DONNÉES PROJETS ────────────────────────────────────────────────
 
 const PROJETS = {
-   Location: {
-    id:    'Recherche Location',
-    icon:  '🏠',
-    label: 'Recherche Location',
-    color: 'accent',
-    hero:  'Appartement T4 — Lyon 6e',
-    sub:   'Budget 420 000 € · Primo-accédant · Mutation Veolia sept. 2025',
-    timeline: [
-      { date: 'Mai 2025',  label: 'Définition du projet & budget',       done: true,  icon: '🎯' },
-      { date: 'Juin 2025', label: 'Recherche de biens & visites',         done: true,  icon: '🔍' },
-      { date: 'Juin 2025', label: 'Dépot de dossier',              done: false, icon: '✍️', active: true },
-      { date: 'Juil 2025', label: 'Etude du dossier',             done: false, icon: '📄' },
-      { date: 'Août 2025', label: 'Dossier accepté',             done: false, icon: '💳' },
-      { date: 'Sep 2025',  label: 'Bail',              done: false, icon: '🔑' },
-      { date: 'Sep 2025',  label: 'Etat des Lieux, Remise des clés & emménagement',       done: false, icon: '📦' },
-    ],
-    taches: [
-      { cat: 'Préparation',   label: 'Définir critères & budget précis',               statut: 'fait',    cout: null, pce: true,  note: 'Fait avec l\'expert' },
-      { cat: 'Préparation',   label: 'Simulation du loyer idéal',                  statut: 'fait',    cout: 0,    pce: false, note: 'Inclus abonnement' },
-      { cat: 'Recherche',     label: 'Sélection de biens ciblés',                      statut: 'fait',    cout: null, pce: true },
-      { cat: 'Recherche',     label: 'Organisation & accompagnement des visites',       statut: 'delegue', cout: 290,  pce: true },
-      { cat: 'Financement',   label: 'Dossier auprès des agences',          statut: 'delegue', cout: 0,    pce: false, note: 'Gratuit — rémunéré par la banque' },
-      { cat: 'Financement',   label: 'Demande Locapass de Action Logement',                 statut: null,      cout: 180,  pce: false },
-      { cat: 'Financement',   label: 'Dossier Garantie Visale Action Logement',             statut: 'delegue', cout: 180,  pce: true },
-      { cat: 'Juridique',     label: 'Relecture du bail',                   statut: null,      cout: 220,  pce: false },
-      { cat: 'Juridique',     label: 'Prendre assurance habitation',           statut: null,      cout: 290,  pce: false },
-      { cat: 'Administratif', label: 'Réalisation Etat des lieux',            statut: null,      cout: 60,   pce: false },
-      { cat: 'Administratif', label: 'Transfert assurances & contrats',                 statut: null,      cout: 90,   pce: false },
-    ],
-    docs: [
-      { icon: '💰', nom: 'Simulation MOBILI-PASS',           date: '05 juin 2025', statut: 'ok' },
-      { icon: '📊', nom: 'Simulation PTZ 2025',              date: '07 juin 2025', statut: 'ok' },
-      { icon: '🏠', nom: 'Sélection de biens — Lyon 3e/6e',  date: '07 juin 2025', statut: 'wait' },
-      { icon: '📄', nom: 'Compromis de vente — à signer',    date: '—',            statut: 'wait' },
-      { icon: '📋', nom: 'Fiche projet — Mutation Mercier',  date: '02 juin 2025', statut: 'ok' },
-      { icon: '✅', nom: 'Guide mobilité Veolia × Timonia',  date: '01 juin 2025', statut: 'ok' },
-    ],
-  },
-  
-  
   achat: {
     id:    'achat',
     icon:  '🏠',
