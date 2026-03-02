@@ -4,7 +4,7 @@ const PROJETS = {
   achat: {
     id:    'achat',
     icon:  '🏠',
-    label: 'Recherche Achat immobilier',
+    label: 'Achat immobilier',
     color: 'accent',
     hero:  'Appartement T3 — Lyon 6e',
     sub:   'Budget 420 000 € · Primo-accédant · Mutation Veolia sept. 2025',
@@ -83,7 +83,7 @@ const PROJETS = {
   },
 
   location: {
-    id:    'Mise en location location',
+    id:    'location',
     icon:  '🏘️',
     label: 'Mise en location',
     color: 'teal',
