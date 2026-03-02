@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timonia — Mon espace</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body class="light">
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">T</div>
+        <span class="logo-text">Timonia</span>
+      </a>
+      <div class="nav-links" id="projectTabs">
+        <button class="nav-link tab-btn active" data-view="dashboard">Mes projets</button>
+        <!-- Onglets projets injectés dynamiquement -->
+      </div>
+      <div class="nav-right">
+        <button class="btn-theme" id="themeToggle">🌙</button>
+        <div class="user-pill">
+          <div class="user-avatar">TM</div>
+          <div class="user-info">
+            <span class="user-name">Thomas Mercier</span>
+            <span class="user-role">Veolia · 4 projets</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- DASHBOARD VIEW -->
+  <div id="view-dashboard" class="view active">
+    <div class="container" style="padding-top:40px;padding-bottom:60px;">
+
+      <!-- Greeting -->
+      <div class="greeting">
+        <h1 class="greeting-title">Bonjour, <em class="text-accent">Thomas</em> 👋</h1>
+        <p class="greeting-sub">Mutation Veolia · Paris → Lyon · 1er septembre 2025</p>
+      </div>
+
+      <!-- Veolia banner -->
+      <div class="veolia-banner">
+        <span class="banner-icon">🏢</span>
+        <div class="banner-body">
+          <p class="banner-title">Avantage Veolia Eau France — Actif</p>
+          <p class="banner-sub">Premier appel expert offert · Accompagnement mobilité pris en charge · Action Logement partenaire</p>
+        </div>
+        <span class="badge badge-green">✓ Couvert</span>
+      </div>
+
+      <!-- Projet cards grid -->
+      <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+  </div>
+
+  <!-- PROJECT DETAIL VIEW (généré dynamiquement) -->
+  <div id="view-projet" class="view">
+    <div class="container" style="padding-top:36px;padding-bottom:60px;">
+
+      <!-- Back + header -->
+      <button class="btn-back" id="backBtn">← Retour</button>
+      <div class="projet-header" id="projetHeader"></div>
+
+      <!-- KPIs -->
+      <div class="kpis-grid" id="projetKpis"></div>
+
+      <!-- Progress bar -->
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span class="progress-label">Progression globale</span>
+          <span class="progress-pct" id="progressPct"></span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+
+      <!-- Onglets -->
+      <div class="detail-tabs">
+        <button class="detail-tab active" data-tab="checklist">✅ Tâches & Délégation</button>
+        <button class="detail-tab" data-tab="timeline">📅 Timeline</button>
+        <button class="detail-tab" data-tab="docs">📁 Documents</button>
+      </div>
+
+      <!-- Contenu onglets -->
+      <div id="tab-checklist" class="tab-content active"></div>
+      <div id="tab-timeline"  class="tab-content"></div>
+      <div id="tab-docs"      class="tab-content"></div>
+    </div>
+  </div>
+
+  <!-- MODAL EXPERT -->
+  <div class="modal-bg" id="modalExpert" hidden>
+    <div class="modal-box">
+      <div style="text-align:center;padding:8px 0 16px">
+        <div style="font-size:48px;margin-bottom:12px">📞</div>
+        <h2 class="modal-title">Appeler votre expert</h2>
+        <p class="modal-sub" style="margin-top:6px">Sophie Laurent est disponible pour faire le point sur votre projet.</p>
+      </div>
+      <div class="expert-card">
+        <p class="expert-name">Sophie Laurent</p>
+        <p class="expert-role">Experte mobilité & financement · Timonia</p>
+        <p class="expert-slot text-accent">📅 Prochain créneau : Jeudi 12 juin — 14h30</p>
+      </div>
+      <button class="btn btn-primary w-full" onclick="closeExpertModal()">Confirmer le RDV →</button>
+      <button class="btn btn-outline w-full" style="margin-top:8px" onclick="closeExpertModal()">Annuler</button>
+    </div>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
