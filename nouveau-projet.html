@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Nouveau projet — Timonia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s;}
+.lora{font-family:'Lora',serif;}
+:root{
+  --bg:#f7f8fc;--surf:#fff;--surf2:#f0f3fb;--surf3:#e6eaf7;
+  --border:rgba(15,30,80,0.08);--text:#0d1829;--muted:#8494b8;
+  --accent:#1e63f0;--accentL:rgba(30,99,240,0.08);--accentM:rgba(30,99,240,0.18);
+  --teal:#0ba592;--green:#16a34a;--greenL:rgba(22,163,74,0.09);
+  --shadow:rgba(0,0,0,0.07);--nav-bg:rgba(247,248,252,0.92);
+}
+body.dark{
+  --bg:#08111e;--surf:#101826;--surf2:#19243a;--surf3:#212d45;
+  --border:rgba(255,255,255,0.07);--text:#dde4f8;--muted:#4e6080;
+  --accentL:rgba(30,99,240,0.16);--accentM:rgba(30,99,240,0.26);
+  --greenL:rgba(22,163,74,0.14);--shadow:rgba(0,0,0,0.35);--nav-bg:rgba(8,17,30,0.92);
+}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:var(--surf3);border-radius:3px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.94)}to{opacity:1;transform:scale(1)}}
+.anim{animation:fadeUp .3s cubic-bezier(.22,1,.36,1);}
+nav{position:sticky;top:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(22px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:860px;margin:0 auto;padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none;}
+.logo-mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800;}
+.logo-text{font-family:'Lora',serif;font-size:19px;color:var(--text);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.btn-icon{background:var(--surf2);border:1px solid var(--border);border-radius:9px;padding:6px 10px;cursor:pointer;font-size:15px;line-height:1;transition:all .18s;}
+.wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px;}
+.stepper{display:flex;align-items:center;justify-content:center;margin-bottom:48px;}
+.step-item{display:flex;align-items:center;}
+.step-circle{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;border:2px solid var(--border);background:var(--surf);color:var(--muted);transition:all .3s;}
+.step-circle.done{background:var(--accent);border-color:var(--accent);color:#fff;}
+.step-circle.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 0 5px var(--accentM);}
+.step-label{font-size:11px;font-weight:700;color:var(--muted);margin-left:8px;white-space:nowrap;transition:color .3s;}
+.step-label.active{color:var(--accent);}.step-label.done{color:var(--text);}
+.step-line{width:48px;height:2px;background:var(--border);margin:0 12px;flex-shrink:0;transition:background .3s;}
+.step-line.done{background:var(--accent);}
+.tag{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;}
+.title{font-family:'Lora',serif;font-size:28px;color:var(--text);letter-spacing:-.02em;margin-bottom:8px;}
+.sub{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:36px;}
+.types-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:36px;}
+@media(max-width:580px){.types-grid{grid-template-columns:repeat(2,1fr);}}
+.type-card{background:var(--surf);border:2px solid var(--border);border-radius:18px;padding:22px 16px;cursor:pointer;transition:all .2s;text-align:center;position:relative;user-select:none;}
+.type-card:hover{border-color:var(--accent);background:var(--accentL);transform:translateY(-2px);box-shadow:0 8px 28px var(--shadow);}
+.type-card.selected{border-color:var(--accent);background:var(--accentL);box-shadow:0 0 0 4px var(--accentM);}
+.type-check{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;display:none;align-items:center;justify-content:center;font-weight:800;}
+.type-card.selected .type-check{display:flex;}
+.type-icon{font-size:28px;width:52px;height:52px;border-radius:14px;background:var(--surf2);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;transition:background .2s;}
+.type-card:hover .type-icon,.type-card.selected .type-icon{background:var(--surf);}
+.type-label{font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px;}
+.type-desc{font-size:11px;color:var(--muted);line-height:1.5;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:540px){.fgrid{grid-template-columns:1fr;}}
+.field{display:flex;flex-direction:column;gap:5px;}
+.field label{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;}
+.field input,.field textarea,.field select{background:var(--surf2);border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border .18s,box-shadow .18s;width:100%;}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accentL);background:var(--surf);}
+.field textarea{resize:vertical;min-height:88px;}
+.budget-wrap{position:relative;}
+.budget-wrap input{padding-right:32px;}
+.currency{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:14px;font-weight:700;color:var(--muted);pointer-events:none;}
+.preview-box{background:var(--surf2);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:16px;}
+.preview-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.preview-icon{width:38px;height:38px;border-radius:11px;background:var(--accentL);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.preview-task{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--text);}
+.preview-task:last-child{border-bottom:none;padding-bottom:0;}
+.p-dot{width:7px;height:7px;border-radius:50%;background:var(--surf3);flex-shrink:0;}
+.preview-more{font-size:12px;color:var(--accent);font-weight:700;margin-top:10px;text-align:center;}
+.summary-card{background:var(--surf);border:1.5px solid var(--border);border-radius:18px;padding:24px;margin-bottom:20px;}
+.srow{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;gap:12px;}
+.srow:last-child{border-bottom:none;padding-bottom:0;}
+.srow .sk{color:var(--muted);font-weight:600;flex-shrink:0;}
+.srow .sv{color:var(--text);font-weight:700;text-align:right;}
+.btn{border:none;border-radius:12px;padding:13px 24px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+.btn-primary{background:var(--accent);color:#fff;}
+.btn-primary:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 8px 24px rgba(30,99,240,.35);}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none;filter:none;}
+.btn-ghost{background:transparent;color:var(--muted);border:1.5px solid var(--border);}
+.btn-ghost:hover{background:var(--surf2);color:var(--text);}
+.btn-row{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:32px;}
+.success{text-align:center;padding:48px 0;animation:scaleIn .4s cubic-bezier(.22,1,.36,1);}
+.success-icon{width:80px;height:80px;border-radius:50%;background:var(--greenL);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 24px;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="dashboard.html">
+      <div class="logo-mark">T</div>
+      <span class="logo-text lora">Timonia</span>
+    </a>
+    <div class="nav-right">
+      <button class="btn-icon" id="darkBtn" onclick="toggleDark()">🌙</button>
+      <a href="dashboard.html" class="btn btn-ghost" style="font-size:13px;padding:8px 16px;">← Tableau de bord</a>
+    </div>
+  </div>
+</nav>
+<main class="wrap">
+  <div class="stepper">
+    <div class="step-item"><div class="step-circle active" id="sc1">1</div><span class="step-label active" id="sl1">Type de projet</span></div>
+    <div class="step-line" id="line1"></div>
+    <div class="step-item"><div class="step-circle" id="sc2">2</div><span class="step-label" id="sl2">Votre projet</span></div>
+    <div class="step-line" id="line2"></div>
+    <div class="step-item"><div class="step-circle" id="sc3">3</div><span class="step-label" id="sl3">Récapitulatif</span></div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div id="step1" class="anim">
+    <p class="tag">Étape 1 sur 3</p>
+    <h1 class="title lora">Quel type de projet ?</h1>
+    <p class="sub">Choisissez la catégorie correspondant à votre situation. Une checklist adaptée sera créée automatiquement.</p>
+    <div class="types-grid" id="typesGrid"></div>
+    <div class="btn-row" style="justify-content:flex-end">
+      <button class="btn btn-primary" id="btnS1" onclick="goStep(2)" disabled>Continuer →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div id="step2" style="display:none">
+    <p class="tag">Étape 2 sur 3</p>
+    <h1 class="title lora" id="s2title">Décrivez votre projet</h1>
+    <p class="sub">Ces informations permettent de personnaliser votre checklist et de fixer vos objectifs.</p>
+    <div class="fgrid"><div class="field" style="grid-column:1/-1"><label>Nom du projet *</label><input type="text" id="projNom" placeholder="Ex : Appartement T3 Lyon 6e" oninput="checkS2()"/></div></div>
+    <div class="fgrid" style="grid-template-columns:1fr"><div class="field"><label>Objectif &amp; contexte</label><textarea id="projObjectif" placeholder="Décrivez votre situation, vos contraintes, ce que vous attendez de ce projet…"></textarea></div></div>
+    <div class="fgrid" id="dynFields"></div>
+    <div class="fgrid">
+      <div class="field"><label>Budget estimé</label><div class="budget-wrap"><input type="number" id="projBudget" placeholder="320 000" min="0"/><span class="currency">€</span></div></div>
+      <div class="field"><label>Date cible</label><input type="date" id="projDate"/></div>
+    </div>
+    <div class="preview-box">
+      <div class="preview-head"><div class="preview-icon" id="pvIcon">📋</div><div><p style="font-size:13px;font-weight:800;color:var(--text)" id="pvTitle">Checklist pré-remplie</p><p style="font-size:12px;color:var(--muted)" id="pvSub">Modifiable à tout moment</p></div></div>
+      <div id="pvTasks"></div><p class="preview-more" id="pvMore"></p>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goStep(1)">← Retour</button>
+      <button class="btn btn-primary" id="btnS2" onclick="goStep(3)" disabled>Continuer →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div id="step3" style="display:none">
+    <p class="tag">Étape 3 sur 3</p>
+    <h1 class="title lora">Tout est prêt !</h1>
+    <p class="sub">Vérifiez les informations avant de créer votre projet. Vous pourrez tout modifier ensuite.</p>
+    <div class="summary-card" id="sumCard"></div>
+    <div class="preview-box" id="sumChecklist"></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goStep(2)">← Modifier</button>
+      <button class="btn btn-primary" onclick="createProject()">✅ Créer mon projet</button>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div id="stepOK" style="display:none">
+    <div class="success">
+      <div class="success-icon">🎉</div>
+      <h2 class="lora" style="font-size:30px;color:var(--text);margin-bottom:10px">Projet créé !</h2>
+      <p style="color:var(--muted);font-size:15px;max-width:380px;margin:0 auto 32px;line-height:1.7">Votre checklist est prête. Ajoutez des tâches, des documents et suivez votre avancement.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="projet.html" class="btn btn-primary">Ouvrir mon projet →</a>
+        <a href="dashboard.html" class="btn btn-ghost">Tableau de bord</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+const darkBtn=document.getElementById('darkBtn');
+function toggleDark(){document.body.classList.toggle('dark');darkBtn.textContent=document.body.classList.contains('dark')?'☀️':'🌙';localStorage.setItem('t-dark',document.body.classList.contains('dark'));}
+if(localStorage.getItem('t-dark')==='true'){document.body.classList.add('dark');darkBtn.textContent='☀️';}
+
+const TYPES=[
+  {id:'achat',icon:'🔍',label:'Recherche achat',desc:'Trouver et acquérir un bien immobilier',
+   fields:[{id:'surface',label:'Surface souhaitée (m²)',type:'number',ph:'65'},{id:'ville',label:'Ville / Zone',type:'text',ph:'Lyon, Paris 11e…'}],
+   tasks:["Définir les critères de recherche","Simulation de prêt immobilier","Sélection de biens ciblés","Organisation des visites","Offre d'achat","Dossier PTZ","Dossier courtier & banques","Relecture compromis de vente","Coordination notaire","Déclaration de changement d'adresse","Transfert assurances & contrats"]},
+  {id:'location',icon:'🏠',label:'Recherche location',desc:'Trouver un logement à louer',
+   fields:[{id:'surface',label:'Surface souhaitée (m²)',type:'number',ph:'45'},{id:'ville',label:'Ville / Zone',type:'text',ph:'Bordeaux, Lyon…'}],
+   tasks:["Définir les critères de recherche","Constitution du dossier locataire","Sélection des annonces ciblées","Organisation des visites","Envoi des dossiers de candidature","Négociation & signature du bail","État des lieux d'entrée","Souscription assurance habitation","Déclaration de changement d'adresse"]},
+  {id:'renovation',icon:'🔧',label:'Rénovation',desc:'Travaux, DPE, aides énergétiques',
+   fields:[{id:'dpe',label:'DPE actuel',type:'text',ph:'Ex : F'},{id:'adresse',label:'Adresse du bien',type:'text',ph:'12 rue des Lilas, Toulouse'}],
+   tasks:["Audit énergétique complet (DPE)","Dossier MaPrimeRénov'","Demande CEE (Certificats Économies Énergie)","Éco-PTZ — prêt travaux à taux zéro","Obtention & comparaison de 3 devis","Sélection artisan RGE","Suivi chantier isolation","Suivi chantier chauffage / PAC","Suivi chantier menuiseries","Réception des travaux & procès-verbal","DPE final & valorisation du bien"]},
+  {id:'vente',icon:'💰',label:'Mise en vente',desc:'Vendre votre bien au meilleur prix',
+   fields:[{id:'adresse',label:'Adresse du bien',type:'text',ph:'5 bd des Chartrons, Bordeaux'},{id:'annee',label:"Année d'acquisition",type:'number',ph:'2016'}],
+   tasks:["Estimation du prix de marché","Simulation plus-value immobilière","DPE vendeur (obligatoire)","Diagnostics obligatoires complets","Photos & visite virtuelle professionnelles","Home staging & conseils valorisation","Diffusion annonce multi-portails","Analyse & négociation des offres","Rédaction & relecture compromis","Coordination notaire jusqu'à l'acte","Remboursement anticipé du crédit"]},
+  {id:'mise-location',icon:'🏘️',label:'Mise en location',desc:'Louer votre bien en toute conformité',
+   fields:[{id:'adresse',label:'Adresse du bien',type:'text',ph:'18 rue Oberkampf, Paris 11e'},{id:'loyer',label:'Loyer cible (€/mois)',type:'number',ph:'1250'}],
+   tasks:["Estimation du loyer de marché","DPE bailleur","Diagnostics obligatoires","Photos professionnelles du logement","Rédaction & diffusion de l'annonce","Tri & vérification des candidats","Rédaction du bail conforme loi ALUR","État des lieux d'entrée","Demande LOCA-PASS Action Logement","Mise en place des quittances","Déclaration revenus fonciers (2044)"]},
+  {id:'autre',icon:'📁',label:'Autre projet',desc:'Projet sur-mesure, checklist libre',
+   fields:[{id:'type_libre',label:'Précisez le type de projet',type:'text',ph:'Ex : Rachat de crédit, SCI, Viager…'}],
+   tasks:[]},
+];
+
+let sel=null,step=1;
+document.addEventListener('DOMContentLoaded',()=>{
+  renderCards();
+  document.getElementById('projDate').setAttribute('min',new Date().toISOString().split('T')[0]);
+});
+
+function renderCards(){
+  document.getElementById('typesGrid').innerHTML=TYPES.map(t=>`
+    <div class="type-card" id="tc-${t.id}" onclick="pickType('${t.id}')">
+      <div class="type-check">✓</div>
+      <div class="type-icon">${t.icon}</div>
+      <div class="type-label">${t.label}</div>
+      <div class="type-desc">${t.desc}</div>
+    </div>`).join('');
+}
+
+function pickType(id){
+  sel=TYPES.find(t=>t.id===id);
+  document.querySelectorAll('.type-card').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('tc-'+id).classList.add('selected');
+  document.getElementById('btnS1').disabled=false;
+}
+
+function setStepper(n){
+  step=n;
+  [1,2,3].forEach(i=>{
+    const c=document.getElementById('sc'+i),l=document.getElementById('sl'+i);
+    c.classList.remove('active','done');l.classList.remove('active','done');
+    if(i<n){c.innerHTML='✓';c.classList.add('done');l.classList.add('done');}
+    else if(i===n){c.innerHTML=i;c.classList.add('active');l.classList.add('active');}
+    else c.innerHTML=i;
+    if(i<3)document.getElementById('line'+i).classList.toggle('done',i<n);
+  });
+}
+
+function show(id){
+  ['step1','step2','step3','stepOK'].forEach(s=>document.getElementById(s).style.display='none');
+  const el=document.getElementById(id);el.style.display='';
+  el.classList.remove('anim');void el.offsetWidth;el.classList.add('anim');
+}
+
+function goStep(n){
+  if(n===2&&!sel)return;
+  if(n===3&&!document.getElementById('projNom').value.trim())return;
+  setStepper(n);
+  if(n===1)show('step1');
+  else if(n===2){buildS2();show('step2');}
+  else if(n===3){buildS3();show('step3');}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function buildS2(){
+  document.getElementById('s2title').textContent=sel.label+' — Votre projet';
+  const df=document.getElementById('dynFields');
+  df.innerHTML=sel.fields.map(f=>`<div class="field"><label>${f.label}</label><input type="${f.type}" id="dyn-${f.id}" placeholder="${f.ph}"/></div>`).join('');
+  df.style.display=sel.fields.length?'':'none';
+  document.getElementById('pvIcon').textContent=sel.icon;
+  document.getElementById('pvTitle').textContent=sel.tasks.length>0?sel.tasks.length+' tâches pré-remplies':'Checklist vierge — à personnaliser';
+  document.getElementById('pvSub').textContent=sel.tasks.length>0?'Modifiable à tout moment dans votre projet':'Ajoutez vos propres tâches librement';
+  document.getElementById('pvTasks').innerHTML=sel.tasks.slice(0,4).map(t=>`<div class="preview-task"><div class="p-dot"></div><span>${t}</span></div>`).join('');
+  document.getElementById('pvMore').textContent=sel.tasks.length>4?`+ ${sel.tasks.length-4} autres tâches incluses`:'';
+}
+function checkS2(){document.getElementById('btnS2').disabled=!document.getElementById('projNom').value.trim();}
+
+function buildS3(){
+  const nom=document.getElementById('projNom').value.trim();
+  const obj=document.getElementById('projObjectif').value.trim();
+  const bud=document.getElementById('projBudget').value;
+  const dat=document.getElementById('projDate').value;
+  const dynVals=(sel.fields||[]).map(f=>{const el=document.getElementById('dyn-'+f.id);return el&&el.value?{k:f.label,v:el.value}:null;}).filter(Boolean);
+  const rows=[
+    {k:'Type',v:`${sel.icon} ${sel.label}`},{k:'Nom du projet',v:nom},
+    obj?{k:'Objectif',v:obj}:null,
+    bud?{k:'Budget',v:Number(bud).toLocaleString('fr-FR')+' €'}:null,
+    dat?{k:'Date cible',v:new Date(dat).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})}:null,
+    ...dynVals.map(d=>({k:d.k,v:d.v}))
+  ].filter(Boolean);
+  document.getElementById('sumCard').innerHTML=rows.map(r=>`<div class="srow"><span class="sk">${r.k}</span><span class="sv">${r.v}</span></div>`).join('');
+  const sc=document.getElementById('sumChecklist');
+  if(sel.tasks.length>0){
+    sc.innerHTML=`<div class="preview-head"><div class="preview-icon">${sel.icon}</div><div><p style="font-size:13px;font-weight:800;color:var(--text)">${sel.tasks.length} tâches prêtes</p><p style="font-size:12px;color:var(--muted)">Vous pourrez en ajouter, modifier ou supprimer librement</p></div></div>${sel.tasks.map(t=>`<div class="preview-task"><div class="p-dot"></div><span>${t}</span></div>`).join('')}`;
+    sc.style.display='';
+  }else sc.style.display='none';
+}
+
+function getCat(tid,label){
+  const l=label.toLowerCase();
+  if(/dossier|ptz|prêt|courtier|maprime|cee|loca-pass/.test(l))return'Financement';
+  if(/diagnostic|dpe|audit/.test(l))return'Diagnostics';
+  if(/notaire|compromis|bail|acte/.test(l))return'Juridique';
+  if(/photo|annonce|staging|diffusion/.test(l))return'Marketing';
+  if(/chantier|artisan|devis|travaux/.test(l))return'Travaux';
+  if(/état des lieux|remise|clés/.test(l))return'Entrée';
+  if(/assurance|adresse|quittance|déclaration/.test(l))return'Administratif';
+  return'Préparation';
+}
+
+function createProject(){
+  const nom=document.getElementById('projNom').value.trim();
+  const obj=document.getElementById('projObjectif').value.trim();
+  const bud=document.getElementById('projBudget').value;
+  const dat=document.getElementById('projDate').value;
+  const dynData={};
+  (sel.fields||[]).forEach(f=>{const el=document.getElementById('dyn-'+f.id);if(el)dynData[f.id]=el.value;});
+  const id='proj_'+Date.now();
+  const project={
+    id,type:sel.id,icon:sel.icon,label:sel.label,nom,objectif:obj,
+    budget:bud?parseInt(bud):null,dateCible:dat||null,dynData,
+    createdAt:new Date().toISOString(),
+    taches:sel.tasks.map((label,i)=>({id:i,cat:getCat(sel.id,label),label,statut:null,cout:null,date:null,note:null,delegation:null})),
+    documents:[],
+  };
+  const existing=JSON.parse(localStorage.getItem('timonia-projects')||'[]');
+  existing.push(project);
+  localStorage.setItem('timonia-projects',JSON.stringify(existing));
+  localStorage.setItem('timonia-current-project',id);
+  setStepper(4);show('stepOK');
+}
+</script>
+</body>
+</html>
