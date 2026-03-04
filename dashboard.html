@@ -1045,6 +1045,18 @@ function changeDelegatee(projId, taskId, val) {
   if (t) t.delegatee = val;
 }
 
+function changeDate(projId, taskId, val) {
+  const p = projects.find(x=>x.id===projId);
+  const t = p?.tasks.find(x=>x.id===taskId);
+  if (t) { t.date = val; renderTimeline(p); }
+}
+
+function changePrice(projId, taskId, val) {
+  const p = projects.find(x=>x.id===projId);
+  const t = p?.tasks.find(x=>x.id===taskId);
+  if (t) { t.price = parseFloat(val)||0; refreshSummary(p); }
+}
+  
 function deleteTask(projId, taskId) {
   const p = projects.find(x=>x.id===projId);
   if (!p) return;
