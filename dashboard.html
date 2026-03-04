@@ -815,29 +815,57 @@ function buildProjectView(p, container) {
     </div>
   </div>
 
-  <!-- SUMMARY -->
-  <div class="summary-strip">
+<!-- SUMMARY -->
+<div class="summary-wrap">
+
+  <!-- Ligne 1 — Réalisé -->
+  <div class="summary-row-label">Réalisé</div>
+  <div class="summary-strip summary-strip-3">
     <div class="summary-card">
       <div class="summary-label">Coûts engagés</div>
-      <div class="summary-value" style="color:var(--red)" id="sv-1">${f.coutEngage.toLocaleString('fr-FR')} €</div>
+      <div class="summary-value" style="color:var(--red)" id="sv-1">0 €</div>
       <div class="summary-sub">Délégations réalisées</div>
     </div>
     <div class="summary-card">
       <div class="summary-label">Économies réalisées</div>
-      <div class="summary-value" style="color:var(--green)" id="sv-2">${f.economieFaite.toLocaleString('fr-FR')} €</div>
+      <div class="summary-value" style="color:var(--green)" id="sv-2">0 €</div>
       <div class="summary-sub">Tâches "Je fais" terminées</div>
     </div>
+    <div class="summary-card summary-card-total">
+      <div class="summary-label">Bilan réalisé net</div>
+      <div class="summary-value" id="sv-bilan1">0 €</div>
+      <div class="summary-sub">Coûts engagés − économies</div>
+    </div>
+  </div>
+
+  <!-- Ligne 2 — Prévisionnel -->
+  <div class="summary-row-label">Prévisionnel</div>
+  <div class="summary-strip summary-strip-3">
     <div class="summary-card">
       <div class="summary-label">Coûts prévisionnels</div>
-      <div class="summary-value" style="color:var(--accent)" id="sv-3">${f.coutPrev.toLocaleString('fr-FR')} €</div>
+      <div class="summary-value" style="color:var(--accent)" id="sv-3">0 €</div>
       <div class="summary-sub">Délégations à venir</div>
     </div>
     <div class="summary-card">
       <div class="summary-label">Économies à venir</div>
-      <div class="summary-value" style="color:var(--teal)" id="sv-4">${f.economiePrev.toLocaleString('fr-FR')} €</div>
+      <div class="summary-value" style="color:var(--teal)" id="sv-4">0 €</div>
       <div class="summary-sub">Tâches "Je fais" restantes</div>
     </div>
+    <div class="summary-card summary-card-total">
+      <div class="summary-label">Bilan prévisionnel net</div>
+      <div class="summary-value" id="sv-bilan2">0 €</div>
+      <div class="summary-sub">Coûts prévisionnels − économies</div>
+    </div>
   </div>
+
+  <!-- Ligne 3 — Total net -->
+  <div class="summary-total-net">
+    <div class="summary-total-label">TOTAL NET PROJET</div>
+    <div class="summary-total-value" id="sv-total">0 €</div>
+    <div class="summary-total-sub">Bilan réalisé + prévisionnel</div>
+  </div>
+
+</div> 
 
   <!-- TABS -->
   <div class="dash-tabs">
