@@ -931,7 +931,11 @@ function renderTasks(p) {
           ? `<div class="task-aide-row"><span style="font-size:14px">💰</span><span>${t.name.replace('💰 ','')}</span></div>`
           : t.name}
       </td>
-      <td>${fmtDate(t.date)}</td>
+<td>
+  <input type="date" class="deleg-input" style="width:140px"
+    value="${t.date||''}"
+    onchange="changeDate(${p.id},${t.id},this.value)">
+</td>      
       <td>
         <select class="deleg-select" onchange="changeDeleg(${p.id},${t.id},this)">
           <option value="self"    ${t.delegation==='self'   ?'selected':''}>✋ Je fais</option>
@@ -947,11 +951,12 @@ function renderTasks(p) {
         ${t.delegation==='self'   ?'<span class="deleg-badge deleg-self">✋ Moi</span>':''}
         ${t.delegation==='other' && !t.done ?'':'' }
       </td>
-      <td>
-        ${t.price
-          ? `<span class="${t.delegation!=='self'?'price-cost':'price-saving'}">${t.price.toLocaleString('fr-FR')} €</span>`
-          : '<span style="color:var(--muted)">—</span>'}
-      </td>
+<td>
+  <input type="number" class="deleg-input" style="width:90px" min="0"
+    value="${t.price||''}"
+    placeholder="0 €"
+    onchange="changePrice(${p.id},${t.id},this.value)">
+</td>     
       <td><button class="btn-row-delete" onclick="deleteTask(${p.id},${t.id})">✕</button></td>
     `;
     tbody.appendChild(tr);
