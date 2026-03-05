@@ -859,10 +859,23 @@ function buildProjectView(p, container) {
   </div>
 
   <!-- Ligne 3 — Total net -->
-  <div class="summary-total-net">
-    <div class="summary-total-label">TOTAL NET PROJET</div>
-    <div class="summary-total-value" id="sv-total">0 €</div>
-    <div class="summary-total-sub">Bilan réalisé + prévisionnel</div>
+<div class="summary-row-label">TOTAL NET PROJET</div>
+  <div class="summary-strip summary-strip-3">
+    <div class="summary-card">
+      <div class="summary-label">Coûts TOTAL </div>
+      <div class="summary-value" style="color:var(--accent)" id=("sv-1"+"sv-3")>0 €</div>
+      <div class="summary-sub">Délégations total</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label">Économies TOTAL</div>
+      <div class="summary-value" style="color:var(--teal)" id=("sv-2"+"sv-4")>0 €</div>
+      <div class="summary-sub">Tâches "Je fais" total</div>
+    </div>
+    <div class="summary-card summary-card-total">
+      <div class="summary-label">Bilan TOTAL net</div>
+      <div class="summary-value" id=""sv-bilan1"+"sv-bilan2"">0 €</div>
+      <div class="summary-sub">Coûts total − économies</div>
+    </div>
   </div>
 
 </div> 
