@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon projet — Timonia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     NAVBAR
+     ═══════════════════════════════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">T</div>
+      <div class="logo-text">Timo<span>nia</span></div>
+    </a>
+    <div class="nav-user">
+      <div class="nav-avatar" id="navAvatar">—</div>
+      <div class="nav-user-info">
+        <div class="nav-user-name" id="navName">—</div>
+        <div class="nav-user-company" id="navCompany">—</div>
+      </div>
+      <div class="nav-partner-badge" id="navBadge" style="display:none"></div>
+    </div>
+    <div class="nav-right">
+      <button class="btn-theme" id="themeBtn" onclick="toggleDark()">🌙</button>
+      <a href="index.html" class="btn-logout" style="text-decoration:none">← Site</a>
+      <button class="btn-logout" onclick="authLogout()">Déconnexion</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     APP SHELL
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="app-shell">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="dash-sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">
+        <span class="partner-dot"></span>
+        Mes projets
+      </div>
+    </div>
+
+    <!-- Liste des projets — remplie par JS -->
+    <div class="project-list" id="sidebarProjectList"></div>
+
+    <!-- Bouton nouveau projet -->
+    <div style="padding:12px 16px; border-top:1px solid var(--border); margin-top:auto;">
+      <button class="btn btn-primary btn-sm w-full" onclick="openNewProject()">
+        ＋ Nouveau projet
+      </button>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="dash-main">
+
+    <!-- Project Header -->
+    <div class="proj-header">
+      <div class="proj-header-badge" id="projBadge">—</div>
+      <div class="proj-header-title" id="projTitle">—</div>
+      <div class="proj-header-meta">
+        <span>📍 <span id="projAdresse">—</span></span>
+        <span>🎯 <span id="projObjectif">—</span></span>
+        <span>⏰ <span id="projDeadline">—</span></span>
+      </div>
+      <div class="proj-progress-row">
+        <span>Avancement des missions</span>
+        <span id="projProgressPct">0/0 · 0%</span>
+      </div>
+      <div class="proj-progress-bar">
+        <div class="proj-progress-fill" id="projProgressFill" style="width:0%"></div>
+      </div>
+      <div class="proj-cta-row">
+        <button class="btn-cta btn-cta-primary" onclick="switchTab('tab-bilan')">
+          📊 Voir mon bilan
+        </button>
+        <button class="btn-cta btn-cta-teal" onclick="alert('Redirection vers la prise de RDV...')">
+          📞 Appeler mon expert
+        </button>
+        <button class="btn-cta btn-cta-ghost" onclick="alert('Redirection vers les offres...')">
+          🤝 Tout déléguer
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="dash-tabs">
+      <button class="dash-tab active" data-tab="tab-bilan">📊 Bilan</button>
+      <button class="dash-tab" data-tab="tab-missions">✅ Missions</button>
+      <button class="dash-tab" data-tab="tab-prestataires">👷 Prestataires</button>
+      <button class="dash-tab" data-tab="tab-documents">📁 Documents</button>
+      <button class="dash-tab" data-tab="tab-notes">📝 Notes</button>
+    </div>
+
+    <!-- ── BILAN ── -->
+    <div class="tab-pane active" id="tab-bilan">
+      <div class="bilan-wrap" id="bilanContent">
+        <div style="text-align:center;padding:40px;color:var(--muted)">Chargement…</div>
+      </div>
+    </div>
+
+    <!-- ── MISSIONS ── -->
+    <div class="tab-pane" id="tab-missions">
+      <div id="missionsContent">
+        <div class="missions-toolbar">
+          <div class="missions-count" id="missionsCount">—</div>
+          <div class="view-toggle">
+            <button class="view-btn active" id="viewListBtn" onclick="switchView('list')">☰ Liste</button>
+            <button class="view-btn" id="viewTlBtn" onclick="switchView('timeline')">📅 Planning</button>
+          </div>
+        </div>
+        <div id="listViewWrap">
+          <table class="mission-table">
+            <thead>
+              <tr>
+                <th style="width:36px"></th>
+                <th>Mission</th>
+                <th>Type</th>
+                <th>Date prévue</th>
+                <th>Délégation</th>
+                <th>Délégué à</th>
+                <th>Prix (€)</th>
+                <th style="width:36px"></th>
+              </tr>
+            </thead>
+            <tbody id="missionBody"></tbody>
+          </table>
+          <button class="btn-add-mission" onclick="addMission()">＋ Ajouter une mission</button>
+        </div>
+        <div class="timeline-wrap" id="timelineWrap"></div>
+      </div>
+    </div>
+
+    <!-- ── PRESTATAIRES ── -->
+    <div class="tab-pane" id="tab-prestataires">
+      <div id="prestContent">
+        <div style="text-align:center;padding:40px;color:var(--muted)">Chargement…</div>
+      </div>
+    </div>
+
+    <!-- ── DOCUMENTS ── -->
+    <div class="tab-pane" id="tab-documents">
+      <div id="docsContent">
+        <div style="text-align:center;padding:40px;color:var(--muted)">Chargement…</div>
+      </div>
+    </div>
+
+    <!-- ── NOTES ── -->
+    <div class="tab-pane" id="tab-notes">
+      <div class="notes-input-row">
+        <textarea class="notes-textarea" id="noteInput"
+          placeholder="Écrivez une note, observation, contact… (Ctrl+Entrée pour valider)"
+          rows="3"></textarea>
+        <button class="btn-add-note" onclick="addNote()">＋ Ajouter</button>
+      </div>
+      <div class="notes-list" id="notesList"></div>
+    </div>
+
+  </main>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
